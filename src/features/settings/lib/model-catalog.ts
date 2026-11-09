@@ -43,6 +43,7 @@ const PREFERRED: Record<string, string[]> = {
   orcarouter: ["orcarouter/auto"],
   runcrate: ["deepseek-ai/DeepSeek-V4.1-Flash", "zai-org/GLM-5.3", "openai/gpt-oss-120b"],
   cheaperinference: ["gpt-5.4-mini", "gpt-5.4", "claude-sonnet-5"],
+  standardcompute: ["StandardCompute", "deepseek/deepseek-v4.1-flash", "z-ai/glm-5.3"],
 };
 
 const MAX_MODELS = 18;

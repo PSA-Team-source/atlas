@@ -220,6 +220,14 @@ export const PROVIDERS: ProviderDef[] = [
     chat: true,
   },
   {
+    id: "standardcompute",
+    name: "Standard Compute",
+    env: "STANDARDCOMPUTE_API_KEY",
+    category: "Gateway",
+    docsUrl: "https://standardcompute.com",
+    chat: true,
+  },
+  {
     id: "litellm",
     name: "LiteLLM Proxy",
     env: "LITELLM_API_KEY",

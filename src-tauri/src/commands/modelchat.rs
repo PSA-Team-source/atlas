@@ -65,6 +65,7 @@ pub(super) fn provider_endpoint(provider: &str) -> Option<(ApiKind, &'static str
         "orcarouter" => (ApiKind::OpenAi, "https://api.orcarouter.ai/v1"),
         "cheaperinference" => (ApiKind::OpenAi, "https://api.cheaperinference.com/v1"),
         "runcrate" => (ApiKind::OpenAi, "https://api.runcrate.ai/v1"),
+        "opper" => (ApiKind::OpenAi, "https://api.opper.ai/v3/compat"),
         _ => return None,
     })
 }
@@ -416,6 +417,11 @@ fn fallback_models(provider: &str) -> Vec<&'static str> {
             "zai-org/GLM-5.3",
             "openai/gpt-oss-120b",
         ],
+        "opper" => vec![
+            "anthropic/claude-sonnet-4-6",
+            "openai/gpt-5.5",
+            "gemini/gemini-3.8-flash",
+        ],
         _ => vec![],
     }
 }
@@ -688,6 +694,26 @@ mod tests {
                 "deepseek-ai/DeepSeek-V4.1-Flash",
                 "zai-org/GLM-5.3",
                 "openai/gpt-oss-120b",
+            ]
+        );
+    }
+
+    #[test]
+    fn test_opper_endpoint() {
+        let (kind, url) = provider_endpoint("opper").expect("opper endpoint must exist");
+        assert_eq!(kind, ApiKind::OpenAi);
+        assert_eq!(url, "https://api.opper.ai/v3/compat");
+    }
+
+    #[test]
+    fn test_opper_fallback_models() {
+        let models = fallback_models("opper");
+        assert_eq!(
+            models,
+            vec![
+                "anthropic/claude-sonnet-4-6",
+                "openai/gpt-5.5",
+                "gemini/gemini-3.8-flash"
             ]
         );
     }

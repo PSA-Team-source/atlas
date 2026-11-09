@@ -113,6 +113,7 @@ const ENV_KEY_VARS: &[(&str, &[&str])] = &[
         &["CHEAPER_INFERENCE_API_KEY", "CHEAPERINFERENCE_API_KEY"],
     ),
     ("runcrate", &["RUNCRATE_API_KEY"]),
+    ("opper", &["OPPER_API_KEY"]),
 ];
 
 /// One env-imported key: which provider it maps to, the variable it came from,
@@ -795,5 +796,15 @@ mod tests {
         assert!(entry.is_some(), "runcrate must be in ENV_KEY_VARS");
         let (_, vars) = entry.unwrap();
         assert_eq!(vars, &["RUNCRATE_API_KEY"]);
+    }
+
+    #[test]
+    fn test_opper_env_vars() {
+        let entry = ENV_KEY_VARS
+            .iter()
+            .find(|(provider, _)| *provider == "opper");
+        assert!(entry.is_some(), "opper must be in ENV_KEY_VARS");
+        let (_, vars) = entry.unwrap();
+        assert_eq!(vars, &["OPPER_API_KEY"]);
     }
 }

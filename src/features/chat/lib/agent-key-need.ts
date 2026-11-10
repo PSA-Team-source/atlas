@@ -88,6 +88,13 @@ const NEEDS: ProviderNeed[] = [
     phrases: ["opper api key"],
   },
   {
+    provider: "standardcompute",
+    label: "Standard Compute",
+    consoleHint: "standardcompute.com",
+    envVars: ["STANDARDCOMPUTE_API_KEY"],
+    phrases: ["standard compute api key", "standardcompute api key"],
+  },
+  {
     provider: "xai",
     label: "xAI",
     consoleHint: "console.x.ai",

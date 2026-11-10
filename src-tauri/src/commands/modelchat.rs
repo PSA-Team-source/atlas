@@ -66,6 +66,7 @@ pub(super) fn provider_endpoint(provider: &str) -> Option<(ApiKind, &'static str
         "cheaperinference" => (ApiKind::OpenAi, "https://api.cheaperinference.com/v1"),
         "runcrate" => (ApiKind::OpenAi, "https://api.runcrate.ai/v1"),
         "opper" => (ApiKind::OpenAi, "https://api.opper.ai/v3/compat"),
+        "standardcompute" => (ApiKind::OpenAi, "https://api.stdcmpt.com/v1"),
         _ => return None,
     })
 }
@@ -418,6 +419,11 @@ fn fallback_models(provider: &str) -> Vec<&'static str> {
             "openai/gpt-oss-120b",
         ],
         "opper" => vec!["claude-sonnet-4-6", "gpt-5.5", "gemini-3.8-flash"],
+        "standardcompute" => vec![
+            "StandardCompute",
+            "deepseek/deepseek-v4.1-flash",
+            "z-ai/glm-5.3",
+        ],
         _ => vec![],
     }
 }
@@ -707,6 +713,27 @@ mod tests {
         assert_eq!(
             models,
             vec!["claude-sonnet-4-6", "gpt-5.5", "gemini-3.8-flash"]
+        );
+    }
+
+    #[test]
+    fn test_standardcompute_endpoint() {
+        let (kind, url) =
+            provider_endpoint("standardcompute").expect("standardcompute endpoint must exist");
+        assert_eq!(kind, ApiKind::OpenAi);
+        assert_eq!(url, "https://api.stdcmpt.com/v1");
+    }
+
+    #[test]
+    fn test_standardcompute_fallback_models() {
+        let models = fallback_models("standardcompute");
+        assert_eq!(
+            models,
+            vec![
+                "StandardCompute",
+                "deepseek/deepseek-v4.1-flash",
+                "z-ai/glm-5.3",
+            ]
         );
     }
 }

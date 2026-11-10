@@ -66,6 +66,7 @@ pub(super) fn provider_endpoint(provider: &str) -> Option<(ApiKind, &'static str
         "cheaperinference" => (ApiKind::OpenAi, "https://api.cheaperinference.com/v1"),
         "runcrate" => (ApiKind::OpenAi, "https://api.runcrate.ai/v1"),
         "opper" => (ApiKind::OpenAi, "https://api.opper.ai/v3/compat"),
+        "uberllm" => (ApiKind::OpenAi, "https://api.uberllm.dev/v1"),
         _ => return None,
     })
 }
@@ -418,6 +419,11 @@ fn fallback_models(provider: &str) -> Vec<&'static str> {
             "openai/gpt-oss-120b",
         ],
         "opper" => vec!["claude-sonnet-4-6", "gpt-5.5", "gemini-3.8-flash"],
+        "uberllm" => vec![
+            "deepseek/deepseek-v4-flash",
+            "anthropic/claude-sonnet-4.6",
+            "openai/gpt-5.5",
+        ],
         _ => vec![],
     }
 }
@@ -707,6 +713,26 @@ mod tests {
         assert_eq!(
             models,
             vec!["claude-sonnet-4-6", "gpt-5.5", "gemini-3.8-flash"]
+        );
+    }
+
+    #[test]
+    fn test_uberllm_endpoint() {
+        let (kind, url) = provider_endpoint("uberllm").expect("uberllm endpoint must exist");
+        assert_eq!(kind, ApiKind::OpenAi);
+        assert_eq!(url, "https://api.uberllm.dev/v1");
+    }
+
+    #[test]
+    fn test_uberllm_fallback_models() {
+        let models = fallback_models("uberllm");
+        assert_eq!(
+            models,
+            vec![
+                "deepseek/deepseek-v4-flash",
+                "anthropic/claude-sonnet-4.6",
+                "openai/gpt-5.5",
+            ]
         );
     }
 }

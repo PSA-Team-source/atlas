@@ -220,6 +220,14 @@ export const PROVIDERS: ProviderDef[] = [
     chat: true,
   },
   {
+    id: "opper",
+    name: "Opper",
+    env: "OPPER_API_KEY",
+    category: "Gateway",
+    docsUrl: "https://platform.opper.ai",
+    chat: true,
+  },
+  {
     id: "standardcompute",
     name: "Standard Compute",
     env: "STANDARDCOMPUTE_API_KEY",

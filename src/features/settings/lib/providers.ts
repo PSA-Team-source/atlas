@@ -228,6 +228,14 @@ export const PROVIDERS: ProviderDef[] = [
     chat: true,
   },
   {
+    id: "standardcompute",
+    name: "Standard Compute",
+    env: "STANDARDCOMPUTE_API_KEY",
+    category: "Gateway",
+    docsUrl: "https://standardcompute.com",
+    chat: true,
+  },
+  {
     id: "uberllm",
     name: "UberLLM",
     env: "UBERLLM_API_KEY",

@@ -54,6 +54,7 @@ describe("detectKeyNeed", () => {
       ["CHEAPER_INFERENCE_API_KEY missing", "cheaperinference"],
       ["RUNCRATE_API_KEY missing", "runcrate"],
       ["OPPER_API_KEY missing", "opper"],
+      ["STANDARDCOMPUTE_API_KEY missing", "standardcompute"],
       ["UBERLLM_API_KEY missing", "uberllm"],
       ["needs XAI_API_KEY", "xai"],
       ["MISTRAL_API_KEY not set", "mistral"],
